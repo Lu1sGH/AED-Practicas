@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <Time.h>
 
 int crearA(char **, int);
 void impA(char **, int);

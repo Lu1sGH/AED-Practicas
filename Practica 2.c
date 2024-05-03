@@ -1,21 +1,34 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 
 int consTab(int ***, int);
 void destTab(int ***, int);
 void initTab(int ***, int);
 void impTab(int ***, int);
 void bloqCas(int ***, int);
+void asigQ(int ***, int, int, int *, int *);
+int verDisp(int ***, int, int, int);
 
 int main(){
-    int **a, n = 8, ctr;
+    int **a, n = 0, ctr, nComb=0, reinas = 0, flg;
+
+    puts("PROBLEMA DE LAS N REINAS");
+    puts("Ingrese el num de reinas para el que se quiere resolver el problema:");
+    scanf(" %d", &n);
+    printf("El problema se resolvera para %d reinas. \n", n);
 
     if(consTab(&a, n)){
         initTab(&a, n);
+        system("pause");
         impTab(&a, n);
-        //bloqCas(&a, n);
-        //impTab(&a, n);
+
+        printf("%cDesea bloquear casillas? \n 1=Si \n 0=No \n", 168);
+        scanf(" %d", &flg);
+        if(flg) bloqCas(&a, n);
+
+        asigQ(&a, n, 0, &nComb, &reinas);
+        impTab(&a, n);
+        printf("Num. de combinaciones: %d.\n", nComb);
         destTab(&a, n);
     }else{
         printf("No se pudo reservar el suficiente espacio en memoria. \n");
@@ -60,6 +73,8 @@ void initTab(int ***t, int n){
 void impTab(int ***t, int n){
     int i, j, k;
 
+    system("cls");
+
     printf("%c%c", 32, 32);
     for(k = 0; k < n; k++) printf("%c%c", 65+k, 32);
     printf("\n");
@@ -83,6 +98,8 @@ void impTab(int ***t, int n){
         }
         printf("\n");
     }
+
+    //system("pause");
 }
 
 void bloqCas(int ***t, int n){
@@ -116,4 +133,64 @@ void bloqCas(int ***t, int n){
     }
 
     free(a);
+    impTab(t, n);
+    system("pause");
+}
+
+void asigQ(int ***t, int n, int niv, int *nComb, int *nReinas){
+    int i;
+
+    if((*nReinas < n) && (niv < n)){
+        for(i = 0; i<n; i++){
+            if(verDisp(t, n, niv, i)){
+                (*t)[niv][i] = 2;
+                (*nReinas)++;
+                impTab(t, n);
+                asigQ(t, n, niv+1, nComb, nReinas);
+                impTab(t, n);
+                (*t)[niv][i] = 0;
+                (*nReinas)--;
+            }
+        }
+    }else{
+        (*nComb)++;
+        //char c;
+        //scanf(" %c", &c);
+        return;
+    }
+    return;
+}
+
+int verDisp(int ***t, int n, int niv, int pos){
+    int i, j;
+
+    if((*t)[niv][pos]==3)
+        return 0;
+
+    for(i = 0; i<n; i++){
+        if(((*t)[i][pos]==2) || ((*t)[niv][i]==2))
+            return 0;
+    }
+
+    for(i = niv, j = pos; i >= 0 && j >= 0; i--, j--){
+        if((*t)[i][j]==2)
+            return 0;
+    }
+
+    for(i = niv, j = pos; i < n && j < n; i++, j++){
+        if((*t)[i][j]==2)
+            return 0;
+    }
+
+    for(i = niv, j = pos; i >= 0 && j < n; i--, j++){
+        if((*t)[i][j]==2)
+            return 0;
+    }
+
+    for(i = niv, j = pos; i < n && j >= 0; i++, j--){
+        if((*t)[i][j]==2)
+            return 0;
+    }
+
+    return 1;
 }

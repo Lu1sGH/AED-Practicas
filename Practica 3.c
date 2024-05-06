@@ -135,5 +135,5 @@ void mergeIter(int **a, int n){
         }
     }
     if((av/2) < n)
-        recomb(a, 0, av/2, n-1);
+        recomb(a, 0, (av/2)-1, n-1);
 }

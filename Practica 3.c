@@ -5,7 +5,6 @@
 int crearA(int **, int);
 void destA(int **);
 void impA(int **, int);
-void impAFT(int **, int, int);
 void llenarA(int **, int);
 void quick(int **, int, int);
 void swap(int **, int, int);
@@ -14,13 +13,13 @@ void recomb(int **, int, int, int);
 void mergeIter(int **, int);
 
 int main(){
-    int *a, n = 10, maxI = n-1;
+    int *a, n = 16, maxI = n-1;
 
     crearA(&a, n);
     llenarA(&a, n);
     impA(&a, n);
     //quick(&a, 0, maxI);
-    //merge(&a, 0, maxI);
+    merge(&a, 0, maxI);
     mergeIter(&a, n);
     impA(&a, n);
     destA(&a);
@@ -42,13 +41,6 @@ int crearA(int **a, int m){
 void impA(int **a, int m){
     int i;
     for(i = 0; i < m; i++)
-            printf("%d ", *(*a+i));
-    puts("\n");
-}
-
-void impAFT(int **a, int m, int n){
-    int i;
-    for(i = m; i < n; i++)
             printf("%d ", *(*a+i));
     puts("\n");
 }
@@ -133,8 +125,15 @@ void recomb(int **a, int m, int mitad, int n) {
 }
 
 void mergeIter(int **a, int n){
-    int mitad;
-    for(int i=0; i < n; i++){
-
+    int mitad, av, i, j, k;
+    for(av = 2; av < n; av *= 2){
+        for(k = 0; av+k-1 < n; k += av){
+            i = k;
+            j = av+k-1;
+            mitad = (i+j)/2;
+            recomb(a, i, mitad, j);
+        }
     }
+    if((av/2) < n)
+        recomb(a, 0, av/2, n-1);
 }

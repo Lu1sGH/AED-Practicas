@@ -2,35 +2,50 @@
 #include <stdlib.h>
 #include <time.h>
 
-int crearA(int **, int);
-void destA(int **);
-void impA(int **, int);
-void llenarA(int **, int);
-void quick(int **, int, int);
-void swap(int **, int, int);
-void merge(int **, int, int);
-void recomb(int **, int, int, int);
-void mergeIter(int **, int);
+int crearA(char **, int);
+void destA(char **);
+void impA(char **, int);
+void llenarA(FILE *, char **, int);
+void quick(char **, int, int);
+void swap(char **, int, int);
+void merge(char **, int, int);
+void recomb(char **, int, int, int);
+void mergeIter(char **, int);
+void rFile(char *[], FILE **, int *);
 
-int main(){
-    int *a, n = 16, maxI = n-1;
+int main(int argc, char **argv){
+    int n, maxI, ctr = 0;
+    char *a;
+    FILE *file;
 
-    crearA(&a, n);
-    llenarA(&a, n);
-    impA(&a, n);
-    //quick(&a, 0, maxI);
-    merge(&a, 0, maxI);
-    mergeIter(&a, n);
-    impA(&a, n);
-    destA(&a);
+    rFile(argv, &file, &n);
+    n--;
+    maxI = n-1;
+
+    if(n >= 3000){
+        printf("El archivo tiene %d caracteres. \n", n);
+        ctr = crearA(&a, n);
+    }else{
+        printf("El programa no puede ser ejecutado si el archivo no tiene al menos de 3000 caracteres.\n Caracteres actuales: %d \n", n);
+    }
+
+    if(ctr){
+        llenarA(file, &a, n);
+        impA(&a, n);
+        //quick(&a, 0, maxI);
+        //merge(&a, 0, maxI);
+        mergeIter(&a, n);
+        impA(&a, n);
+        destA(&a);
+    }
 
     return 0;
 }
 
 
-int crearA(int **a, int m){
+int crearA(char **a, int m){
     int i;
-    *a = (int *)malloc(m*sizeof(int));
+    *a = (char *)malloc(m*sizeof(char));
     if(*a == NULL){
         puts("No se reservo la memoria");
         return 0;
@@ -38,27 +53,25 @@ int crearA(int **a, int m){
     return 1;
 }
 
-void impA(int **a, int m){
+void impA(char **a, int m){
     int i;
     for(i = 0; i < m; i++)
-            printf("%d ", *(*a+i));
+        //if(((*(*a+i))!=10) && ((*(*a+i))!=32))
+            printf("%c", *(*a+i));
     puts("\n");
 }
 
-void destA(int **a){
+void destA(char **a){
     free(*a);
     *a = NULL;
 }
 
-void llenarA(int **a, int m){
-    srand(time(NULL));
-    //int b[10] = {3, 2, 5, 0, 1, 8, 7, 6, 9, 4};
-    for(int i = 0; i < m; i++)
-        *((*a)+i) = rand()%11;
-        //*((*a)+i) = b[i];
+void llenarA(FILE *f, char **a, int m){
+    for(int j=0; j<m; j++)
+        *(*a+j) = fgetc(f);
 }
 
-void quick(int **a, int m, int n){
+void quick(char **a, int m, int n){
     if((n >= 0) && (m <= n)){
         int piv, i, j;
 
@@ -80,14 +93,14 @@ void quick(int **a, int m, int n){
     }
 }
 
-void swap(int **a, int i, int j){
-    int t;
+void swap(char **a, int i, int j){
+    char t;
     t = *(*a+i);
     *(*a+i) = *(*a+j);
     *(*a+j) = t;
 }
 
-void merge(int **a, int m, int n){
+void merge(char **a, int m, int n){
     if(m!=n){
 
         int mitad = m + (n-m)/2;
@@ -100,9 +113,9 @@ void merge(int **a, int m, int n){
     }
 }
 
-void recomb(int **a, int m, int mitad, int n) {
+void recomb(char **a, int m, int mitad, int n) {
     int i, j, k, tam = n - m + 1;
-    int *aux = (int *)malloc(tam * sizeof(int));
+    char *aux = (char *)malloc(tam * sizeof(char));
 
     if (aux != NULL) {
         for (k = 0, i = m, j = mitad + 1; k < tam; k++) {
@@ -124,7 +137,7 @@ void recomb(int **a, int m, int mitad, int n) {
     }
 }
 
-void mergeIter(int **a, int n){
+void mergeIter(char **a, int n){
     int mitad, av, i, j, k;
     for(av = 2; av < n; av *= 2){
         for(k = 0; av+k-1 < n; k += av){
@@ -134,6 +147,20 @@ void mergeIter(int **a, int n){
             recomb(a, i, mitad, j);
         }
     }
+
     if((av/2) < n)
         recomb(a, 0, (av/2)-1, n-1);
+}
+
+void rFile(char **argv, FILE **a, int *n){
+    if(argv[1]==NULL)
+        *a = fopen("TEXTO.txt", "r");
+    else
+        *a = fopen(argv[1], "r");
+
+    char c;
+    while((c=fgetc(*a))!=EOF){
+        (*n)++;
+    }
+    rewind(*a);
 }

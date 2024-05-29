@@ -17,7 +17,6 @@ int main(int argc, char *argv[]){
     FILE *f;
 
     rFile(argv, &f, &i);
-    i--;
     if(i>=3000){
         printf("El archivo tiene %d caracteres. \n", i);
         ctr = crearA(&a, i);

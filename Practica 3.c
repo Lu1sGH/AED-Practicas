@@ -19,10 +19,9 @@ int main(int argc, char **argv){
     FILE *file;
 
     rFile(argv, &file, &n);
-    n--;
     maxI = n-1;
 
-    if(n >= 3000){
+    if(n >= 3000 || 1){
         printf("El archivo tiene %d caracteres. \n", n);
         ctr = crearA(&a, n);
     }else{
@@ -55,9 +54,10 @@ int crearA(char **a, int m){
 
 void impA(char **a, int m){
     int i;
-    for(i = 0; i < m; i++)
+    for(i = 0; i < m; i++){
         //if(((*(*a+i))!=10) && ((*(*a+i))!=32))
-            printf("%c", *(*a+i));
+        printf("%c", *(*a+i));
+    }
     puts("\n");
 }
 
@@ -138,18 +138,20 @@ void recomb(char **a, int m, int mitad, int n) {
 }
 
 void mergeIter(char **a, int n){
-    int mitad, av, i, j, k;
+    int mitad = 0, av = 0, i = 0, j = 0, k=1, taux = 0;
+
     for(av = 2; av < n; av *= 2){
         for(k = 0; av+k-1 < n; k += av){
             i = k;
             j = av+k-1;
-            mitad = (i+j)/2;
+            mitad =(i+j)/2;
             recomb(a, i, mitad, j);
         }
+        recomb(a, k, n-2-taux, n-1); //toma la mitad de acuerdo al tamaño de la ultima combinacion
+        taux = n-1-k; // calcula el tamaño de la combinacion realizada
     }
 
-    if((av/2) < n)
-        recomb(a, 0, (av/2)-1, n-1);
+    recomb(a, 0, k-1, n-1);
 }
 
 void rFile(char **argv, FILE **a, int *n){

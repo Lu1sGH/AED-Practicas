@@ -1,21 +1,90 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <Time.h>
+
+void crearA(int *******, int, int, int, int, int, int);
+void llenarA(int ******, int, int, int, int, int, int);
+void impA(int ******, int, int, int, int, int, int);
+void liberarA(int *******, int, int, int, int, int, int);
+int cambioV();
 
 int main(){
+    int A = 2, B = 2, C = 2, D = 2, E = 2, F = 2;
+    int ******tensor = NULL;
 
-    int a=1, b=1, c=2, d=3, e=4, f=5;
-    int *x, *y, *z;
-    int **u, **v, **w;
+    crearA(&tensor, A, B, C, D, E, F);
+    llenarA(tensor, A, B, C, D, E, F);
+    impA(tensor, A, B, C, D, E, F);
+    liberarA(&tensor, A, B, C, D, E, F);
 
-    x=&f; y=&e; z=&d;
-    a *= *z;
-    b += *y-42;
-    c -= 13*(*x);
-    u = &x; y = *u; *y = 3*f;
-    v = &y; w = &z; u = w; w = v; v = &x;
-    **u = a+1; **v = b+2; **w = c+3;
-    printf("(%x) a=%d \n(%x) b=%d \n(%x) c=%d \n(%x) d=%d \n(%x) e=%d \n(%x) f=%d \n", &a, a, &b, b, &c, c, &d, d, &e, e, &f, f);
-    printf("(%x) x=%x \n(%x) y=%x  \n(%x) z=%x \n", &x, x, &y, y, &z, z);
-    printf("u=%x v=%x w=%x \n", u, v, w);
     return 0;
+}
+
+void crearA(int *******tensor, int A, int B, int C, int D, int E, int F){
+    int g, h, i, j, k;
+    *tensor = (int ******)malloc(A*sizeof(int *****));
+    for(g = 0; g < A; g++){
+        *(*tensor+g) = (int *****)malloc(B*sizeof(int ****));
+        for(h = 0; h < B; h++){
+            *(*(*tensor+g)+h) = (int ****)malloc(C*sizeof(int ***));
+            for(i = 0; i < C; i++){
+                *(*(*(*tensor+g)+h)+i) = (int ***)malloc(D*sizeof(int **));
+                for(j = 0; j < D; j++){
+                    *(*(*(*(*tensor+g)+h)+i)+j) = (int **)malloc(E*sizeof(int *));
+                    for(k = 0; k < E; k++){
+                        *(*(*(*(*(*tensor+g)+h)+i)+j)+k) = (int *)malloc(F*sizeof(int));
+                    }
+                }
+            }
+        }
+    }
+}
+
+void llenarA(int ******tensor, int A, int B, int C, int D, int E, int F){
+    int g = 0, h = 0, i = 0, j = 0, k = 0, l = 0;
+    for(g = 0; g < A; g++)
+        for(h = 0; h < B; h++)
+            for(i = 0; i < C; i++)
+                for(j = 0; j < D; j++)
+                    for(k = 0; k < E; k++)
+                        for(l = 0; l < F; l++)
+                            *(*(*(*(*(*(tensor+g)+h)+i)+j)+k)+l) = cambioV();
+}
+
+void impA(int ******tensor, int A, int B, int C, int D, int E, int F){
+    int g = 0, h = 0, i = 0, j = 0, k = 0, l = 0;
+    for(g = 0; g < A; g++)
+        for(h = 0; h < B; h++)
+            for(i = 0; i < C; i++)
+                for(j = 0; j < D; j++)
+                    for(k = 0; k < E; k++)
+                        for(l = 0; l < F; l++)
+                            printf("TENSOR[%d][%d][%d][%d][%d][%d] = %d \n", g, h, i, j, k, l, *(*(*(*(*(*(tensor+g)+h)+i)+j)+k)+l));
+}
+
+void liberarA(int *******tensor, int A, int B, int C, int D, int E, int F){
+    int g, h, i, j, k;
+    for(g = 0; g < A; g++){
+        for(h = 0; h < B; h++){
+            for(i = 0; i < C; i++){
+                for(j = 0; j < D; j++){
+                    for(k = 0; k < E; k++){
+                        free(*(*(*(*(*(*tensor+g)+h)+i)+j)+k));
+                    }
+                    free(*(*(*(*(*tensor+g)+h)+i)+j));
+                }
+                free(*(*(*(*tensor+g)+h)+i));
+            }
+            free(*(*(*tensor+g)+h));
+        }
+        free(*(*tensor+g));
+    }
+    free(*tensor);
+    *tensor = NULL;
+}
+
+int cambioV(){
+    srand(time(NULL));
+    return rand()%2;
 }
 

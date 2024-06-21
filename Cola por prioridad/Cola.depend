@@ -1,0 +1,37 @@
+# depslib dependency file v1.0
+1718947979 source:c:\users\luis z\documents\programas c\aed\cola\cola\cola.c
+	<stdio.h>
+	<stdlib.h>
+	"cola.h"
+
+1718945357 c:\users\luis z\documents\programas c\aed\cola\cola\cola.h
+	<stdio.h>
+	<stdlib.h>
+	"nodo.h"
+	"elemento.h"
+
+1718947690 c:\users\luis z\documents\programas c\aed\cola\cola\nodo.h
+	<stdio.h>
+	<stdlib.h>
+	"elemento.h"
+
+1718935367 c:\users\luis z\documents\programas c\aed\cola\cola\elemento.h
+	<stdio.h>
+	<stdlib.h>
+
+1718935362 source:c:\users\luis z\documents\programas c\aed\cola\cola\elemento.c
+	<stdio.h>
+	<stdlib.h>
+	"elemento.h"
+
+1718947170 source:c:\users\luis z\documents\programas c\aed\cola\cola\main.c
+	<stdio.h>
+	<stdlib.h>
+	"cola.h"
+	"elemento.h"
+
+1718947828 source:c:\users\luis z\documents\programas c\aed\cola\cola\nodo.c
+	<stdio.h>
+	<stdlib.h>
+	"nodo.h"
+

@@ -1,0 +1,65 @@
+# depslib dependency file v1.0
+1719033503 source:c:\users\luis z\documents\programas c\aed\cola\pilas\elemento.c
+	<stdio.h>
+	<stdlib.h>
+	"elemento.h"
+
+1719033478 c:\users\luis z\documents\programas c\aed\cola\pilas\elemento.h
+	<stdio.h>
+	<stdlib.h>
+
+1719033621 source:c:\users\luis z\documents\programas c\aed\cola\pilas\main.c
+	<stdio.h>
+	<stdlib.h>
+	"pila.h"
+
+1719033263 c:\users\luis z\documents\programas c\aed\cola\pilas\pila.h
+	<stdio.h>
+	<stdlib.h>
+	"nodo.h"
+
+1719033250 c:\users\luis z\documents\programas c\aed\cola\pilas\nodo.h
+	<stdio.h>
+	<stdlib.h>
+	"elemento.h"
+
+1719033242 source:c:\users\luis z\documents\programas c\aed\cola\pilas\nodo.c
+	<stdio.h>
+	<stdlib.h>
+	"nodo.h"
+
+1719033591 source:c:\users\luis z\documents\programas c\aed\cola\pilas\pila.c
+	"pila.h"
+
+1719033503 source:c:\users\luis z\documents\programas c\aed\estructuras de datos\pilas\elemento.c
+	<stdio.h>
+	<stdlib.h>
+	"elemento.h"
+
+1719033478 c:\users\luis z\documents\programas c\aed\estructuras de datos\pilas\elemento.h
+	<stdio.h>
+	<stdlib.h>
+
+1719033242 source:c:\users\luis z\documents\programas c\aed\estructuras de datos\pilas\nodo.c
+	<stdio.h>
+	<stdlib.h>
+	"nodo.h"
+
+1719033250 c:\users\luis z\documents\programas c\aed\estructuras de datos\pilas\nodo.h
+	<stdio.h>
+	<stdlib.h>
+	"elemento.h"
+
+1719039339 source:c:\users\luis z\documents\programas c\aed\estructuras de datos\pilas\pila.c
+	"pila.h"
+
+1719033263 c:\users\luis z\documents\programas c\aed\estructuras de datos\pilas\pila.h
+	<stdio.h>
+	<stdlib.h>
+	"nodo.h"
+
+1719045361 source:c:\users\luis z\documents\programas c\aed\estructuras de datos\pilas\main.c
+	<stdio.h>
+	<stdlib.h>
+	"pila.h"
+

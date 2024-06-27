@@ -258,5 +258,39 @@ int insertarElementoPorPrioridad(Cola c, Elemento e)
 	return(FALSO);
 }
 
+int imprimirColaActividades(Cola c)
+{
+	Nodo siguiente= NULL, nodo= NULL;
+	Elemento e= NULL;
+	int sw= FALSO;
+	int act= 0;
+
+	if (c==NULL)
+	  return(FALSO);
+
+	printf("<");
+
+	nodo= c->primero;
+
+	while(nodo != NULL)
+	{
+		leerElemento(nodo, &e);
+		leerAct(e, &act);
+		printf("%c", act);
+
+		sw= consultarEnlaceA(nodo, &siguiente);
+		if (sw==FALSO)
+		  return(FALSO);
+
+        if(nodo != c->ultimo){
+            nodo= siguiente;
+            printf(", ");
+        }else
+            nodo = NULL;
+	}
+	printf(">\n");
+	return(VERDADERO);
+}
+
 #endif
 

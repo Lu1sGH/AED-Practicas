@@ -35,12 +35,14 @@ int destruirElemento(Elemento *e)
 	return(VERDADERO);
 }
 
-int escribirDato(Elemento e, int dato)
+int escribirDato(Elemento e, int dato, int act)
 {
 	if (e==NULL)
 	  return(FALSO);
 
 	e->dato= dato;
+	if(!act) e->actividad = dato+65;
+	else e->actividad = act;
 
 	return(VERDADERO);
 }
@@ -51,6 +53,17 @@ int leerDato(Elemento e, int *dato)
 	  return(FALSO);
 
 	*dato= e->dato;
+	//printf("dato: %d\n", e->dato);
+
+	return(VERDADERO);
+}
+
+int leerAct(Elemento e, int *act)
+{
+	if (e==NULL)
+	  return(FALSO);
+
+	*act= e->actividad;
 	//printf("dato: %d\n", e->dato);
 
 	return(VERDADERO);

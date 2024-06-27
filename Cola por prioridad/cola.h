@@ -22,6 +22,7 @@ int consultarPrimero(Cola c, Elemento *e);
 int consultarUltimo(Cola c, Elemento *e);
 int destruirCola(Cola *q);
 int imprimirCola(Cola c);
+int imprimirColaActividades(Cola c);
 //Cola con prioridad
 int insertarElementoPorPrioridad(Cola c, Elemento e);
 

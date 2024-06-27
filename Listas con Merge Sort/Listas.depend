@@ -1,0 +1,35 @@
+# depslib dependency file v1.0
+1719469637 source:c:\users\luis z\documents\programas c\aed\estructuras de datos\listas\elemento.c
+	<stdio.h>
+	<stdlib.h>
+	"elemento.h"
+
+1719469643 c:\users\luis z\documents\programas c\aed\estructuras de datos\listas\elemento.h
+	<stdio.h>
+	<stdlib.h>
+
+1719469792 source:c:\users\luis z\documents\programas c\aed\estructuras de datos\listas\lista.c
+	"lista.h"
+
+1719469656 c:\users\luis z\documents\programas c\aed\estructuras de datos\listas\lista.h
+	<stdio.h>
+	<stdlib.h>
+	"nodo.h"
+	"elemento.h"
+
+1719469630 c:\users\luis z\documents\programas c\aed\estructuras de datos\listas\nodo.h
+	<stdio.h>
+	<stdlib.h>
+	"elemento.h"
+
+1719474228 source:c:\users\luis z\documents\programas c\aed\estructuras de datos\listas\main.c
+	<stdio.h>
+	<stdlib.h>
+	<Time.h>
+	"lista.h"
+
+1719469625 source:c:\users\luis z\documents\programas c\aed\estructuras de datos\listas\nodo.c
+	<stdio.h>
+	<stdlib.h>
+	"nodo.h"
+
